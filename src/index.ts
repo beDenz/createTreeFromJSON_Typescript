@@ -1,6 +1,4 @@
 import classnames from "classnames";
-import { link } from 'fs';
-
 
 
 const item:tepmlateObject = {
@@ -65,26 +63,22 @@ const item:tepmlateObject = {
 interface tepmlateObject {
      name: string;
      attr: string;
-     childs?: tepmlateObject[];
+     childs: tepmlateObject[];
      temp: number;
-}
+   // [key:string]:tepmlateObject[keyof tepmlateObject];
+    }
+
 
 class Tree {
+
+    private _object:tepmlateObject | undefined;
+
     constructor() {
+
+      //  console.log(JSON.stringify(item));
     }
 
-    public sayHello() {
-        console.log("hello");
-    }
-
-    public createTree():any {
-        let temp:any = document.createElement("h2");
-        temp.innerHTML = "Hello";
-       // console.log(temp);
-        return temp;
-    }
-
-    public readTree(object:any):any {
+    private _readTree(object:any):HTMLElement {
 
         let ulInner:HTMLUListElement = document.createElement('ul');
             ulInner.className = "ulInner";
@@ -122,7 +116,7 @@ class Tree {
                         div.appendChild(spanButton);
                    
                        
-                        span.textContent = object[key] + object.temp;
+                        span.textContent = object[key].toString() + object.temp;
                                         
                         div.appendChild(span);
 
@@ -142,7 +136,7 @@ class Tree {
 
                 }         
 
-                if (Array.isArray(object[key]) && (object[key].length > 0))  object[key].forEach((item:tepmlateObject) =>ulInner.appendChild(this.readTree(item)));
+                if (Array.isArray(object[key]) && (object[key].length > 0))  object[key].forEach((item:tepmlateObject) => ulInner.appendChild(this._readTree(item)));
             }
  
         if (ulInner.childNodes.length > 0) li.appendChild(ulInner);
@@ -152,14 +146,15 @@ class Tree {
      return li;
     }
 
-    public tempFunc(object:any):any {
+    public drawTree(object:any):any {
         let ulMain:HTMLUListElement = document.createElement('ul');
             ulMain.className = "ulMain";
 
-
-            const xxx:any = this.readTree(object);
-
-            ulMain.appendChild(xxx);
+        if (object) {
+            const readyTree:HTMLElement = this._readTree(object);
+            ulMain.appendChild(readyTree);
+        }
+            
 
             return ulMain;
 
@@ -169,6 +164,38 @@ class Tree {
 const myTree:Tree = new Tree;
 const treeview:any = document.getElementById('treeview');
 
-if (treeview) treeview.appendChild(myTree.tempFunc(item));
+if (treeview) treeview.appendChild(myTree.drawTree(item));
 
 
+
+const fileInput:any = document.getElementById("fileupload");
+
+if (fileInput) fileInput.addEventListener('change', readFile, false);
+
+function readFile(upload:any) {
+    
+    const target:HTMLInputElement = upload.target as HTMLInputElement;
+  
+
+    let reader = new FileReader();
+
+    if (target && target.files) {
+    
+                reader.readAsText(target.files[0]);
+
+                reader.onload = function() {
+                    const result:string = reader.result as string;
+                    //console.log( typeof reader.result);
+                    console.log(JSON.parse(result));
+                };
+
+                reader.onerror = function() {
+                    console.log(reader.error);
+                };
+ 
+   }
+      
+   
+ 
+  
+}

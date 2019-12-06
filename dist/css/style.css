@@ -79,6 +79,14 @@ h1, h2, h3 {
   margin: 0 auto;
 }
 
+.mapping {
+  width: 50%;
+}
+
+.interface {
+  width: 50%;
+}
+
 .drawTree__item {
   padding: 10px;
   display: block;
