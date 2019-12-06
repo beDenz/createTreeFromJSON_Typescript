@@ -1,0 +1,81 @@
+            <ul class="drawTree">
+                <li class="drawTree__item">
+                    <ul>
+                        <li class="drawTree__item">
+                            <div class="display-flex">
+                                <span class="drawTree__button elegant-icon">&#x4c;</span>
+                                <span class="drawTree__button elegant-icon">&#x4b;</span>
+                                <span class="drawTree__title">Name block</span>
+                            </div> 
+                        </li>
+                        <li class="drawTree__item">
+                            <div class="display-flex">
+                                <span class="drawTree__button elegant-icon">&#x4c;</span>
+                                <span class="drawTree__button elegant-icon">&#x4b;</span>
+                                <span class="drawTree__title">Name block</span>
+                                <ul class="itemInterface display-flex margin-left-15px">
+                                    <li class="itemInterface__item">add</li>
+                                    <li class="itemInterface__item">delete</li>
+                                    <li class="itemInterface__item">edit</li>
+                                </ul> 
+                            </div>
+                            <ul>
+                                <li class="drawTree__item">
+                                    <div class="display-flex">
+                                            <span class="drawTree__button elegant-icon">&#x4c;</span>
+                                            <span class="drawTree__button elegant-icon">&#x4b;</span>
+                                            <span class="drawTree__title">Name block</span>
+                                            <ul class="itemInterface display-flex margin-left-15px">
+                                                    <li class="itemInterface__item">add</li>
+                                                    <li class="itemInterface__item">delete</li>
+                                                    <li class="itemInterface__item">edit</li>
+                                                </ul> 
+                                    </div> 
+                                </li>
+                                <li class="drawTree__item" >
+                                    <div class="display-flex">
+                                            <span class="drawTree__button elegant-icon">&#x4c;</span>
+                                            <span class="drawTree__button elegant-icon">&#x4b;</span>
+                                            <span class="drawTree__title">Name block</span>
+                                    </div>
+                                    <ul>
+                                        <li class="drawTree__item" >
+                                            <div class="display-flex">
+                                                    <span class="drawTree__button elegant-icon">&#x4c;</span>
+                                                    <span class="drawTree__button elegant-icon">&#x4b;</span>
+                                                    <span class="drawTree__title">Name block</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="drawTree__item">
+                                    <div class="display-flex">
+                                            <span class="drawTree__button elegant-icon">&#x4c;</span>
+                                            <span class="drawTree__button elegant-icon">&#x4b;</span>
+                                            <span class="drawTree__title">Name block</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="drawTree__item">
+                            <div class="display-flex">
+                                    <span class="drawTree__button elegant-icon">&#x4c;</span>
+                                    <span class="drawTree__button elegant-icon">&#x4b;</span>
+                                    <span class="drawTree__title">Name block</span>
+                            </div> 
+                        </li>
+                        <li class="drawTree__item" >
+                            <div class="display-flex">
+                                    <span class="drawTree__title">Name block</span>
+                            </div>
+                        </li>
+                        <li class="drawTree__item">
+                            <div class="display-flex">
+                                    <span class="drawTree__title">Name block</span>
+                                </div>
+                        </li>
+                    </ul>
+                    
+                </li>
+                      
+            </ul>

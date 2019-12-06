@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300|Open+Sans:400,400i,500,700,800|Oswald:300,400,700|Poppins:300,400&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+@font-face {
+  font-family: "Elegant Icon";
+  src: url(../fonts/ElegantIcons.eot?) format("eot"), url(../fonts/ElegantIcons.woff) format("woff"), url(../fonts/ElegantIcons.ttf) format("truetype");
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+p {
+  font-size: 18px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  max-width: 1600px;
+}
+
+.display-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flex-align-center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.elegant-icon {
+  font-family: "Elegant Icon";
+}
+
+.margin-0-auto {
+  margin: 0 auto;
+}
+
+.margin-left-15px {
+  margin-left: 15px;
+}
+
+.margin-top-50px {
+  margin-top: 50px;
+}
+
+.item-open {
+  display: block !important;
+}
+
+.item-close {
+  display: none;
+}
+
+.header {
+  text-align: center;
+}
+
+.header:after {
+  content: "";
+  display: block;
+  width: 50vw;
+  height: 1px;
+  background-color: #8c8c8c;
+  margin: 0 auto;
+}
+
+.drawTree__item {
+  padding: 10px;
+  display: block;
+  font-size: 22px;
+}
+
+.drawTree__button {
+  width: 21px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.drawTree__button:hover {
+  color: #d19f68;
+}
+
+.drawTree .open {
+  display: block;
+}
+
+.drawTree .close {
+  display: none;
+}
+
+.ulInner {
+  display: none;
+}
+
+.tempBlock:hover .itemInterface {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.itemInterface {
+  display: none;
+  padding: 0;
+  background-color: #d19f68;
+  border-radius: 10px;
+}
+
+.itemInterface__item {
+  font-size: .6em;
+  padding: 5px 15px;
+}
+
+.itemInterface__item:hover {
+  color: antiquewhite;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */

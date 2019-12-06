@@ -1,0 +1,175 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300|Open+Sans:400,400i,500,700,800|Oswald:300,400,700|Poppins:300,400&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+@font-face {
+    font-family: "Elegant Icon";
+    src: url(../fonts/ElegantIcons.eot?) format("eot"),
+      url(../fonts/ElegantIcons.woff) format("woff"),
+      url(../fonts/ElegantIcons.ttf) format("truetype"),
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+p {
+    font-size: 18px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1,h2,h3 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.container {
+    max-width: 1600px;
+}
+
+
+
+
+
+.display-flex {
+    display: flex;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.elegant-icon {
+    font-family: "Elegant Icon";
+    //font-style: italic;
+}
+
+
+.margin-0-auto {
+    margin: 0 auto;
+}
+
+.margin-left-15px {
+    margin-left: 15px;
+}
+
+.margin-top-50px {
+    margin-top: 50px;
+}
+
+.item-open {
+    display: block !important;
+}
+
+.item-close {
+    display: none;
+}
+
+////////////////////////
+.header {
+    text-align: center;
+
+    &:after {
+        content: "";
+        display: block;
+        width: 50vw;
+        height: 1px;
+        background-color: #8c8c8c;
+        margin: 0 auto;
+    }
+}
+
+.main {
+
+}
+
+.solution {
+
+}
+
+.mapping {
+
+}
+
+
+.interface {
+ 
+}
+
+.drawTree {
+    
+    &__item {
+       padding: 10px;
+       display: block;
+       // min-height: 25px;
+        font-size: 22px;
+
+      //  &:not(:last-child) {
+      //      padding-bottom: 10px;
+      //  }
+    }
+
+    &__title {
+     // padding: 10px;
+    }
+
+    &__button {
+        width: 21px;
+        padding-right: 10px;
+        cursor: pointer;
+        
+        &:hover {
+            color: #d19f68;
+        }
+    }
+
+    .open {
+        display: block;
+    }
+
+    .close {
+        display: none;
+    }
+
+}
+
+.ulInner {
+    display: none;
+}
+
+
+.tempBlock {
+
+    &:hover .itemInterface {
+        display: flex;
+    }
+
+ 
+}
+
+  .itemInterface {
+    display: none;
+    padding: 0;
+    background-color: #d19f68;
+    border-radius: 10px;
+
+    &__item {
+        font-size: .6em;
+        padding: 5px 15px;
+
+        &:hover {
+            color: antiquewhite;
+            cursor: pointer;
+        }
+    }
+}     
