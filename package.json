@@ -17,6 +17,7 @@
     "classnames": "^2.2.6",
     "css-loader": "^3.2.1",
     "file-loader": "^5.0.2",
+    "file-system": "^2.2.2",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",

@@ -66,8 +66,17 @@ h1, h2, h3 {
   display: none;
 }
 
+.width-50 {
+  width: 50%;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
 .header {
   text-align: center;
+  padding: 0 10vw;
 }
 
 .header:after {
@@ -80,11 +89,7 @@ h1, h2, h3 {
 }
 
 .mapping {
-  width: 50%;
-}
-
-.interface {
-  width: 50%;
+  border-right: 1px solid #d19f68;
 }
 
 .drawTree__item {
@@ -97,6 +102,10 @@ h1, h2, h3 {
   width: 21px;
   padding-right: 10px;
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .drawTree__button:hover {
@@ -126,11 +135,16 @@ h1, h2, h3 {
   padding: 0;
   background-color: #d19f68;
   border-radius: 10px;
+  z-index: 2;
 }
 
 .itemInterface__item {
   font-size: .6em;
   padding: 5px 15px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .itemInterface__item:hover {

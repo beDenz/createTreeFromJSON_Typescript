@@ -75,9 +75,18 @@ h1,h2,h3 {
     display: none;
 }
 
+.width-50 {
+    width: 50%;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
 ////////////////////////
 .header {
     text-align: center;
+    padding: 0 10vw;
 
     &:after {
         content: "";
@@ -91,6 +100,10 @@ h1,h2,h3 {
 
 .main {
 
+    .subtitle {
+
+    }
+
 }
 
 .solution {
@@ -98,12 +111,13 @@ h1,h2,h3 {
 }
 
 .mapping {
-width: 50%;
+
+    border-right: 1px solid #d19f68 ;
 }
 
 
 .interface {
-    width: 50%;
+ 
 }
 
 .drawTree {
@@ -127,6 +141,7 @@ width: 50%;
         width: 21px;
         padding-right: 10px;
         cursor: pointer;
+        user-select: none;
         
         &:hover {
             color: #d19f68;
@@ -162,10 +177,13 @@ width: 50%;
     padding: 0;
     background-color: #d19f68;
     border-radius: 10px;
+    z-index: 2;
+    
 
     &__item {
         font-size: .6em;
         padding: 5px 15px;
+        user-select: none;
 
         &:hover {
             color: antiquewhite;
