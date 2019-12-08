@@ -79,3 +79,117 @@
                 </li>
                       
             </ul>
+
+
+
+            
+/**
+ * 
+ * 
+ * 
+ * 
+ *     private _createTree(object:any):HTMLElement {
+
+        let ulInner:HTMLUListElement = document.createElement('ul');
+            ulInner.className = "ulInner";
+
+        let span:HTMLSpanElement = document.createElement('span');
+            span.className ='drawTree__title';
+        let div:HTMLDivElement = document.createElement('div');
+            div.className='display-flex tempBlock';
+        let li:HTMLLIElement = document.createElement('li');
+            li.className='drawTree__item';
+
+           const itemInterfaceMenu:string[] = ['add', 'delete', 'edit'];
+
+        for (let key in object) {
+                            
+               if (key === "name") {                      
+                        
+                        let spanButton:HTMLSpanElement = document.createElement('span');
+                                spanButton.className ='drawTree__button';
+                                spanButton.textContent = "+";
+                                spanButton.addEventListener("click", (e) => 
+                                {
+                                    const target = e.target as HTMLElement;
+                                    
+                                    if (target.parentElement) {
+                                        if (target.parentElement.nextElementSibling) 
+                                        {                                  
+                                            target.parentElement.nextElementSibling.classList.toggle('item-open');
+                                            target.textContent === "-" ? target.textContent = "+" : target.textContent = "-";      
+                                        }
+                                    } 
+                                });                                                     
+                        div.appendChild(spanButton);
+                   
+                       
+                        span.textContent = object[key].toString() + object.temp;
+                                        
+                        div.appendChild(span);
+
+                        const itemInterface:HTMLUListElement = document.createElement('ul');
+                            itemInterface.className = "itemInterface margin-left-15px";
+
+                            itemInterfaceMenu.forEach((item:string) => {
+                            const itemInterface__item:HTMLLIElement = document.createElement('li');
+                            itemInterface__item.innerHTML = item;
+                            itemInterface__item.className = "itemInterface__item";
+                            itemInterface__item.addEventListener("click", () => this.funcConstuctor[item](object.id));              
+                            itemInterface.appendChild(itemInterface__item);
+                            });
+
+                        div.appendChild(itemInterface);
+                        li.id = object.id;
+
+                        li.appendChild(div);
+
+                }         
+
+                if (Array.isArray(object[key]) && (object[key].length > 0))  object[key].forEach((item:tepmlateObject) => ulInner.appendChild(this._createTree(item)));
+            }
+ 
+        if (ulInner.childNodes.length > 0) li.appendChild(ulInner);
+
+     return li;
+    }
+ */
+
+
+     <form class="edit-interface padding-20">
+        <h3 class="edit-interface__title">Edit element</h3>
+        <div class="edit-interface__row display-flex flex-justify-space-between" >
+            <label for="name">Name:</label>
+            <input class="edit-interface__input" type="text" name="name" id="name" placeholder="Enter name element...">
+        </div>
+
+        <div class="edit-interface__row display-flex flex-justify-space-between">
+            <label for="attribute">Attribute:</label>
+            <input class="edit-interface__input" type="text" name="attribute" id="attribute" placeholder="Enter attribute...">
+        </div>
+
+        <button class="edit-interface__submit-button margin-top-25px" type="submit">Submit</button>
+    </form>
+
+
+<form class="edit-interface padding-20">
+        <div class="edit-interface__header display-flex">
+            <h3 class="edit-interface__title">Edit element</h3>
+            <div id="editInterfaceCloseButton" class="edit-interface__closeButton btn">x</div>
+        </div>
+        <div id="formInputs" >
+            <div class="edit-interface__row display-flex flex-justify-space-between" >
+            <label for="name">Name:</label>
+            <input class="edit-interface__input" type="text" name="name" id="element-name" placeholder="Enter name element...">
+        </div>
+        <div class="edit-interface__row display-flex flex-justify-space-between">
+            <input class="edit-interface__input attribute-name" type="text" id="attribute-name" placeholder="Enter attribute..."> 
+            <span>:</span>
+            <input class="edit-interface__input property" type="text" id="attribute-property" placeholder="Enter property...">
+        </div>
+        </div>
+        
+        <div class="add-attribute-block-button btn margin-0-auto">+</div>
+    
+        <button class="edit-interface__submit-button btn margin-top-25px " type="submit">Submit</button>
+    </form>

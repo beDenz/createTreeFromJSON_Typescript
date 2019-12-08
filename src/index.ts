@@ -5,67 +5,66 @@ import { readFile } from "./service/service";
 
 const item:tepmlateObject = {
 
-    name: "name",
+    name: "name1",
     id: "p1mpk3f7tpce4idr7cn3qq",
-    attr: "attributes",
-    temp: 1,
+    attributes: {},
     childs: [
                 {
-                name: "name",
+                name: "name2",
                 id: "cis9rl4wzxjpkwnjk5q6e",
-                attr: "attributes",
-                temp: 2,
+                attributes: {},
+               
                 childs: [
                     {
-                        name: "name",
+                        name: "name3",
                         id: "6tmca7e30o3cd1qswhako",
-                        attr: "attributes",
-                        temp:3,
+                        attributes: {},
+                      
                         childs: []
                     },
                     {
-                        name: "name",
+                        name: "name4",
                         id: "w4heojiuko8ecsxcqb1xs",
-                        attr: "attributes",
-                        temp: 4,
+                        attributes: {},
+                      
                         childs: [
                             {
-                                name: "name",
+                                name: "name5",
                                 id: "8iiucha1zlyowlqjq08kem",
-                                attr: "attributes",
-                                temp:5,
+                                attributes: {},
+                                
                                 childs: []
                             },
                             {
-                                name: "name",
+                                name: "name6",
                                 id: "vooykgx2czh5r6b436kr62",
-                                attr: "attributes",
-                                temp: 6,
+                                attributes: {},
+                                
                                 childs: []
                             }
                         ]
                     },
                     {
-                        name: "name",
+                        name: "name7",
                         id: "d8milnv79v9cfjbfa9r4fq",
-                        attr: "attributes",
-                        temp:7,
+                        attributes: {},
+                       
                         childs: []
                     }
                 ]
                 },
                 {
-                    name: "name",
+                    name: "name8",
                     id: "izt56iisi5jykildjz10np",
-                    attr: "attributes",
-                    temp: 8,
+                    attributes: {},
+                 
                     childs: []
                 },
                 {
-                    name: "name",
+                    name: "name9",
                     id: "cw267dhpuuk9mgsw40cvb",
-                    attr: "attributes",
-                    temp: 9,
+                    attributes: {},
+                   
                     childs: []
                 }
     ]

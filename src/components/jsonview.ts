@@ -3,7 +3,7 @@ import {tepmlateObject} from "../service/interfaces";
 
 export class Jsonview {
 
-    private _object:tepmlateObject | undefined;
+    private _object:tepmlateObject;
     private _json:string;
 
     constructor(objectTree:any) {

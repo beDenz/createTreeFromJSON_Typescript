@@ -1,9 +1,8 @@
 export interface tepmlateObject {
     name: string;
     id: string;
-    attr: string;
+    attributes: any;
     childs: tepmlateObject[];
-    temp: number;
   // [key:string]:tepmlateObject[keyof tepmlateObject];
    }
 

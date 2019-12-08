@@ -26,6 +26,10 @@ h1, h2, h3 {
   font-family: 'Open Sans', sans-serif;
 }
 
+input, button {
+  border: none;
+}
+
 .container {
   max-width: 1600px;
 }
@@ -34,6 +38,18 @@ h1, h2, h3 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.flex-justify-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flex-justify-space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .flex-align-center {
@@ -52,6 +68,10 @@ h1, h2, h3 {
 
 .margin-left-15px {
   margin-left: 15px;
+}
+
+.margin-top-25px {
+  margin-top: 25px;
 }
 
 .margin-top-50px {
@@ -150,5 +170,89 @@ h1, h2, h3 {
 .itemInterface__item:hover {
   color: antiquewhite;
   cursor: pointer;
+}
+
+.edit-interface {
+  z-index: 5;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  text-align: center;
+  margin-left: 100px;
+  width: 350px;
+  background-color: #d19f68;
+}
+
+.edit-interface__title {
+  font-size: 22px;
+  line-height: 1rem;
+  margin: 0 0 20px 0;
+  text-align: center;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+}
+
+.edit-interface__row:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.edit-interface__input {
+  padding: 5px 10px;
+}
+
+.edit-interface__submit-button {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 10px 30px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.edit-interface__closeButton {
+  font-family: 'Open Sans', sans-serif;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 0 0 0 auto;
+}
+
+.edit-interface .name {
+  width: 80%;
+}
+
+.edit-interface .attribute-name {
+  width: 130px;
+}
+
+.edit-interface .property {
+  width: 160px;
+}
+
+.edit-interface .add-attribute-block-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
+}
+
+.edit-interface .btn {
+  cursor: pointer;
+}
+
+.edit-interface .btn:hover {
+  background-color: #000;
+  color: #fff;
 }
 /*# sourceMappingURL=style.css.map */
