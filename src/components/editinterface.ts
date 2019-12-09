@@ -4,8 +4,6 @@ import { tepmlateObject} from "../service/interfaces";
     Класс описывающий окно редактирования элемента
 */
 
-
-
 export class EditInterface {
 
     private _rerender:Function = () => {};
@@ -14,6 +12,11 @@ export class EditInterface {
     
         private _closeEditIterface() {
     
+            /**
+             * Закрытие окна
+             * 
+             */
+
             const editInterface = document.getElementById("editIterface");
             
             if (editInterface) editInterface.remove();
@@ -72,6 +75,11 @@ export class EditInterface {
         }
 
         private _createHeaderDiv():HTMLElement {
+
+            /**
+             *  Заголовок и кнопка закрытия окна
+             */
+
             const title:HTMLElement = document.createElement('h3');
                 title.textContent = "Edit element";
                 title.className = "edit-interface__title";
@@ -91,7 +99,12 @@ export class EditInterface {
             return headerDiv;
         }
 
-        private _createSubmitButton() {
+        private _createSubmitButton():HTMLElement {
+
+            /**
+             *  Кнопка Submit
+             */
+
             const submitButton:HTMLButtonElement = document.createElement('button');
                 submitButton.className = "edit-interface__submit-button btn margin-top-25px";
                 submitButton.textContent = "Submit";
@@ -100,6 +113,11 @@ export class EditInterface {
         }
         
         private _createWindowWithInputs(NameDiv:HTMLElement, attributes:any):HTMLElement {
+
+            /**
+             * Созание элемента содержашего все редактируемые поля
+             */
+
             const windowWithInputs:HTMLElement = document.createElement('div');
                 windowWithInputs.id = "formInputs";
                 windowWithInputs.className = "margin-top-25px";
@@ -107,16 +125,19 @@ export class EditInterface {
        
                 if (Object.keys(attributes).length > 0) {
                     for (let key in attributes) {
-                        windowWithInputs.appendChild(this._createAttributeDiv( key, attributes[key]));
+                        windowWithInputs.appendChild(this._createAttributeDiv(key, attributes[key]));
                     }
                 };
-                //else windowWithInputs.appendChild(this._createAttributeDiv());
 
-              //  
             return windowWithInputs;
         }
 
         private _createAddAttributeBlockButton(windowWithInputs:HTMLElement):HTMLElement {
+
+            /**
+             *  Создание кнопки для добавления поля для записи атрибутов
+             * 
+             */
 
             const addAttributeBlockButton:HTMLElement = document.createElement('div');
                 addAttributeBlockButton.textContent = "+";
@@ -127,6 +148,11 @@ export class EditInterface {
 
         private _createObjectfromEditWindow(array:NodeListOf<HTMLInputElement>):any {
                     
+            /**
+             * Получаем данные из формы и формуруем объект
+             */
+
+
             let windowObject: any = {
                 attributes: {}
             };
@@ -140,7 +166,13 @@ export class EditInterface {
 
         return windowObject;
         }
-        private _submitForm(e:Event, object:tepmlateObject) {
+
+        private _submitForm(e:Event, object:tepmlateObject):void {
+
+            /**
+             * Обработка изменений
+             */
+
             e.preventDefault();    
                       
             const target = e.target as HTMLInputElement;
@@ -153,8 +185,11 @@ export class EditInterface {
             this._closeEditIterface();
         }
 
-        public createEditInterface(object:tepmlateObject) {   
+        public createEditInterface(object:tepmlateObject):HTMLElement {   
 
+            /**
+             *  Создание окна для редактирования свойств и атрибутов элементов
+             */
             const windowWithInputs:HTMLElement = this._createWindowWithInputs(this._createNameDiv(object.name), object.attributes);
 
             const window:HTMLElement = document.createElement('form');

@@ -4,13 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
-@font-face {
-    font-family: "Elegant Icon";
-    src: url(../fonts/ElegantIcons.eot?) format("eot"),
-      url(../fonts/ElegantIcons.woff) format("woff"),
-      url(../fonts/ElegantIcons.ttf) format("truetype"),
-
-}
 
 * {
     box-sizing: border-box;
@@ -65,11 +58,6 @@ input, button {
 .flex-align-center {
     align-items: center;
 }
-
-.elegant-icon {
-    font-family: "Elegant Icon";
-}
-
 
 .margin-0-auto {
     margin: 0 auto;

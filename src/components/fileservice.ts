@@ -1,11 +1,3 @@
-import { readFile } from "../service/service";
-
-
-
-//const fileInput:HTMLElement | null = document.getElementById("fileupload");
-
-//if (fileInput) fileInput.addEventListener('change', readFile, false);
-
 
 /*
  * Класс для работы с файлами 

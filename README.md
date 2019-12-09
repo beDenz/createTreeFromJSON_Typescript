@@ -1,6 +1,6 @@
 # Интерфейс для создания дерева элементов.
 
-### Typescript/HTML/CSS
+### Typescript/HTML/SCSS/CSS
 
 https://bedenz.github.io/createTreeFromJSON_Typescript/
 
@@ -11,3 +11,5 @@ https://bedenz.github.io/createTreeFromJSON_Typescript/
 
 Интерфейс позволяет выгрузить составленное дерево в виде файла в формате JSON, и в дальнейшем их загружать. На данный момент приложение работает, только со своим форматом. 
 Интерфейс сразу же отображает последние изменения в дереве элементов и в JSON формате.
+
+Webpack собирает проект.

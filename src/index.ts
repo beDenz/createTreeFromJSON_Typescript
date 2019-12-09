@@ -81,6 +81,8 @@ const newFileService = new FileService;
 const treeview:HTMLElement | null = document.getElementById('treeview');
 if (treeview) treeview.appendChild(myTree.drawTree());
 
+
+
 myTree.rerenderJsonObject = myJson.rerender.bind(myJson);
 myTree.editInterfaceSetRender();
 
