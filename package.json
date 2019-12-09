@@ -25,6 +25,5 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@types/classnames": "^2.2.9"
   }
 }

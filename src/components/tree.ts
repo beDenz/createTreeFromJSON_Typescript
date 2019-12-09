@@ -52,6 +52,24 @@ export class Tree {
      return element;
     }
 
+    public drawTree(object:tepmlateObject = this._object):HTMLElement {
+
+        /*
+        * Метод создает корневой блок и добавляет в себя дерево объектов
+        * ULMain - обертка коневого элемента
+        */
+
+        const ulMain:HTMLUListElement = document.createElement('ul');
+            ulMain.className = "ulMain";
+
+        if (object) {
+            const readyTree:HTMLElement = this._createTree(object);
+            ulMain.appendChild(readyTree);
+        }          
+
+            return ulMain;
+    }
+
     private _createItemInterfaceMenu(id:string) {
 
         /**
@@ -71,23 +89,6 @@ export class Tree {
             itemInterface.appendChild(itemInterface__item);
         });
         return itemInterface;
-}
-
-    private _objectIterator(id:string, object:any = this._object, parentObject:tepmlateObject | undefined = undefined):any {
-
-        /*
-         *  Поиск объетка по его ID, возвращает объект содержащий искомый объект и его "родителя" 
-         */
-
-        let result:tepmlateObject | undefined;        
-
-        if (object.id === id) return {object: object, parent:parentObject};
-
-        parentObject = object
-        
-        object.childs.some((item:any) => result = this._objectIterator(id, item, parentObject));
-
-        return result;
     }
 
     private _addItem(id:string):void {
@@ -201,22 +202,21 @@ export class Tree {
         this._object = object;
     }
 
-    public drawTree(object:tepmlateObject = this._object):HTMLElement {
+    private _objectIterator(id:string, object:any = this._object, parentObject:tepmlateObject | undefined = undefined):any {
 
         /*
-        * Метод создает корневой блок и добавляет в себя дерево объектов
-        * ULMain - обертка коневого элемента
-        */
+         *  Поиск объетка по его ID, возвращает объект содержащий искомый объект и его "родителя" 
+         */
 
-        const ulMain:HTMLUListElement = document.createElement('ul');
-            ulMain.className = "ulMain";
+        let result:tepmlateObject | undefined;        
 
-        if (object) {
-            const readyTree:HTMLElement = this._createTree(object);
-            ulMain.appendChild(readyTree);
-        }          
+        if (object.id === id) return {object: object, parent:parentObject};
 
-            return ulMain;
+        parentObject = object
+        
+        object.childs.some((item:any) => result = this._objectIterator(id, item, parentObject));
+
+        return result;
     }
 
     public rerender() {
@@ -226,7 +226,7 @@ export class Tree {
          */
 
         const render = document.getElementById("treeview");
-        if (render) {            
+        if (render) {
             render.children[1].remove();
            setTimeout(()=>{
                render.appendChild(this.drawTree());

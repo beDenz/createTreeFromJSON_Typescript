@@ -83,7 +83,7 @@ if (treeview) treeview.appendChild(myTree.drawTree());
 
 
 
-myTree.rerenderJsonObject = myJson.rerender.bind(myJson);
+myTree.rerenderJsonObject = myJson.rerender.bind(myJson); // пробрасываю сеттерам метод из класса Jsonview класса в класс Tree
 myTree.editInterfaceSetRender();
 
 /*
@@ -101,9 +101,9 @@ myTree.editInterfaceSetRender();
 const downloadButton = document.getElementById("download");
 if (downloadButton) downloadButton.addEventListener("click", (e) =>  { e.preventDefault(), newFileService.download(JSON.stringify(item))});
 
-const fileInput:HTMLElement | null = document.getElementById("fileupload");
+const uploadButton:HTMLElement | null = document.getElementById("fileupload");
 
-if (fileInput) fileInput.addEventListener('change', (e) => {
+if (uploadButton) uploadButton.addEventListener('change', (e) => {
                                                             newFileService.readFile(e).then(res => {
                                                                 item = { ...JSON.parse(res as string)};                                                               
                                                                 myJson.json = item;

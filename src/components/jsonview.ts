@@ -22,6 +22,11 @@ export class Jsonview {
     }    
 
     public drawJson(jsonString:string):void {
+
+        /**
+         *  Вывод в JSON формате 
+         */
+
         const jsonDiv:HTMLElement = document.createElement('div');
         if (jsonString) jsonDiv.innerText = jsonString;
         const json:HTMLElement | null = document.getElementById('json');
