@@ -5,6 +5,7 @@ import { EditInterface } from "./editinterface";
 export class Tree {
 
     private _object:tepmlateObject;
+
     private _funcConstuctor:funcConstuctorInterface = {
         add: (id:string):void => this._addItem(id),
         delete: (id:string):void => this._deleteItem(id),
@@ -18,6 +19,7 @@ export class Tree {
     constructor(objectTree:tepmlateObject) {
     
         this._object = objectTree;
+        //this._object = {... objectTree};
         this._editInteface = new EditInterface;
    
     }
@@ -31,6 +33,10 @@ export class Tree {
     } 
 
     private _createTree(object:tepmlateObject):HTMLElement {
+
+        /*
+         *  Метод обходит входящий массив и строит по его структуре дерево  
+         */
 
         let ulInner:HTMLUListElement = document.createElement('ul');
             ulInner.className = "ulInner item-open";
@@ -47,9 +53,14 @@ export class Tree {
 
     private _objectIterator(id:string, object:any = this._object, parentObject:tepmlateObject | undefined = undefined):any {
 
+        /*
+         *  Поиск объетка по его ID, возвращает объект содержащий искомый объект и его "родителя" 
+         */
+
         let result:tepmlateObject | undefined;        
 
         if (object.id === id) return {object: object, parent:parentObject};
+
         parentObject = object
         
         object.childs.some((item:any) => result = this._objectIterator(id, item, parentObject));
@@ -57,42 +68,38 @@ export class Tree {
         return result;
     }
 
-    // TODO: изменить имена
+
     private _addItem(id:string):void {
- 
-        //let element:HTMLElement | null = document.getElementById(id);
-        //let element2;
-
+        
+        /**
+         * 
+         * Добавление новго обьекта
+         * 
+         */
         const object:any = this._createElement('default name');
-        const item:tepmlateObject = this._objectIterator(id).object;
-        item.childs.push(object.object);
-        /*
-        if (item && element) {
-     
-            item.childs.push(object.object);
-            element2 = element.querySelector(".ulInner");
-            if (element2) element2.appendChild(object.li) 
-            else {
-                const ulInner:HTMLElement = document.createElement('ul');
-                      ulInner.className = "ulInner item-open";
-                      ulInner.appendChild(object.li);
-                element.appendChild(ulInner);
 
-            }
-        }
-*/
-        this.rerender();
+        const item:tepmlateObject = this._objectIterator(id).object;
+
+        item.childs.push(object.object);
+
+        // Запуск перерисовки 
+
+        this.rerender();  
         this._rerenderJsonObject(JSON.stringify(this._object));
     }
 
     private _deleteItem(id:string):void {
-        console.log(this._object);
-        
+
+        /*
+         *  Метод удаления объекта
+         *  корневой элемент удалить нельзя, да и в этом нет смысла
+         */
+
         if(this._objectIterator(id).parent) {
-            let element:HTMLElement | null = document.getElementById(id);
-            if (element) element.remove();
+           // let element:HTMLElement | null = document.getElementById(id);
+            //if (element) element.remove();
             this._objectIterator(id).parent.childs = this._objectIterator(id).parent.childs.filter((item:any) => item.id !== id);
-        } else console.log("This is main element");
+        } else console.log("This is main element"); 
 
         this.rerender();
         this._rerenderJsonObject(JSON.stringify(this._object));
@@ -101,13 +108,25 @@ export class Tree {
 
     private _editItem(id:string):void {
 
+        /**
+         * 
+         * Метод вызывает окно редактирования элемента
+         * 
+         */
+
         const editWindow:HTMLElement = this._editInteface.createEditInterface(this._objectIterator(id).object);
         document.body.appendChild(editWindow);
+
         this.rerender();
         this._rerenderJsonObject(JSON.stringify(this._object));
 }
 
     public drawTree(object:tepmlateObject = this._object):HTMLElement {
+
+        /*
+        * Метод создает корневой блок и добавляет в себя дерево объектов
+        */
+
         let ulMain:HTMLUListElement = document.createElement('ul');
             ulMain.className = "ulMain";
 
@@ -120,28 +139,32 @@ export class Tree {
     }
 
     private _createElement(name:string, id:string = this._createID(), numberOfChildren:number = 0):any {
+
+        /**
+         *  Метод создает элементы дерева
+         */
      
-        let span:HTMLSpanElement = document.createElement('span');
+        const span:HTMLSpanElement = document.createElement('span');
             span.className ='drawTree__title';
-            
-        let div:HTMLDivElement = document.createElement('div');
+            span.textContent = name;
+
+        const div:HTMLDivElement = document.createElement('div');
             div.className='display-flex tempBlock';
 
-        let li:HTMLLIElement = document.createElement('li');
+        const li:HTMLLIElement = document.createElement('li');
             li.className='drawTree__item';
+            li.id = id;
 
-       const itemInterfaceMenu:string[] = ['add', 'delete', 'edit'];
+        const itemInterfaceMenu:string[] = ['add', 'delete', 'edit'];
 
-       let spanButton:HTMLSpanElement = document.createElement('span');
+        const spanButton:HTMLSpanElement = document.createElement('span');
             spanButton.className ='drawTree__button';
-
             numberOfChildren > 0 ? spanButton.textContent = "-": spanButton.textContent = "*";
-            spanButton.addEventListener("click", (e) => 
-       {
+            spanButton.addEventListener("click", (e) => {
            
-           const target = e.target as HTMLElement;
+            const target = e.target as HTMLElement;
 
-           if (target.parentElement) {
+            if (target.parentElement) {
                if (target.parentElement.nextElementSibling) 
                {                                  
                    target.parentElement.nextElementSibling.classList.toggle('item-open');
@@ -149,27 +172,22 @@ export class Tree {
                }
            } 
        });
-
-        div.appendChild(spanButton);
-
-        span.textContent = name;
-                    
-        div.appendChild(span);
-
+    
         const itemInterface:HTMLUListElement = document.createElement('ul');
             itemInterface.className = "itemInterface margin-left-15px";
             itemInterfaceMenu.forEach((item:string) => {
         
-        const itemInterface__item:HTMLLIElement = document.createElement('li');
-            itemInterface__item.innerHTML = item;
-            itemInterface__item.className = "itemInterface__item";
-            itemInterface__item.addEventListener("click", () => this._funcConstuctor[item](id));              
-            itemInterface.appendChild(itemInterface__item);
+            const itemInterface__item:HTMLLIElement = document.createElement('li');
+                itemInterface__item.innerHTML = item;
+                itemInterface__item.className = "itemInterface__item";
+                itemInterface__item.addEventListener("click", () => this._funcConstuctor[item](id));              
+                itemInterface.appendChild(itemInterface__item);
         });
-
-        div.appendChild(itemInterface);
         
-        li.id = id;
+        
+        div.appendChild(spanButton);  
+        div.appendChild(span);
+        div.appendChild(itemInterface);      
 
         li.appendChild(div);
 
@@ -182,7 +200,7 @@ export class Tree {
     }
 
     private _createID():string {
-        // Генератор случайного ID
+        // Генератор уникального ID
         const id:string = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         return id;
     }

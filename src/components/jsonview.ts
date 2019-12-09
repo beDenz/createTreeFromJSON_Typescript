@@ -1,5 +1,10 @@
 import {tepmlateObject} from "../service/interfaces";
 
+/**
+ * Класс отображние дерева в Json виде
+ * 
+ */
+
 
 export class Jsonview {
 

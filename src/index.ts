@@ -3,6 +3,9 @@ import { Jsonview } from "./components/jsonview";
 import { tepmlateObject } from "./service/interfaces";
 import { FileService } from "./components/fileservice";
 
+
+// Начальный объект
+
 let item:tepmlateObject = {
 
     name: "name1",
@@ -70,20 +73,28 @@ let item:tepmlateObject = {
     ]
 }
 
+// Инициализация
 const myTree:Tree = new Tree(item);
+const myJson:Jsonview = new Jsonview(item);
+const newFileService = new FileService;
 
 const treeview:HTMLElement | null = document.getElementById('treeview');
-
 if (treeview) treeview.appendChild(myTree.drawTree());
-
-const myJson:Jsonview = new Jsonview(item);
 
 myTree.rerenderJsonObject = myJson.rerender.bind(myJson);
 myTree.editInterfaceSetRender();
 
+/*
+    Здесь получилось не очень красиво с точки зрения "чистоты" классов
+    Мне требовалось сделать одновременное отображение и графического дерева и JSON формата
+    Для этого требовалось организовать "наблюдение" за объектом, и при его мутации обновлять 
+    его вид. object.watch() - кривой, object.observe() - подошел бы, но его больше не поддерживают,
+    остается только proxy, но с ней я знаком только по документации, и чтобы ей воспользоваться пришлось
+    бы переписывать много кода, на это уже не было времени. Больше вариантов я не нашел, поэтому оставил
+    этот костыль. 
+*/
 
 
-const newFileService = new FileService;
 
 const downloadButton = document.getElementById("download");
 if (downloadButton) downloadButton.addEventListener("click", (e) =>  { e.preventDefault(), newFileService.download(JSON.stringify(item))});
@@ -100,10 +111,3 @@ if (fileInput) fileInput.addEventListener('change', (e) => {
                                                             myJson.rerender();
                                                         }, false);
 
-
-
-const test = document.getElementById("test");
-
-if (test) {
-    console.log("test");
-    test.addEventListener("click", () => console.log(item));}

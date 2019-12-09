@@ -2,17 +2,20 @@ import { readFile } from "../service/service";
 
 
 
-const fileInput:HTMLElement | null = document.getElementById("fileupload");
+//const fileInput:HTMLElement | null = document.getElementById("fileupload");
 
-if (fileInput) fileInput.addEventListener('change', readFile, false);
+//if (fileInput) fileInput.addEventListener('change', readFile, false);
 
 
+/*
+ * Класс для работы с файлами 
+ * Простые функции загрузки/выгрузки json файла, без бэкенда, без хранения на сервере
+ */
 
-    export class FileService {
+
+export class FileService {
         constructor() {
-
         }
-
 
         public download(data:string) {
             const file = new Blob([data], {type: 'text/plain'});
