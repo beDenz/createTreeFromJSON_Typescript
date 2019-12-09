@@ -25,7 +25,7 @@ export class FileService {
             }, 0); 
         }
 
-        public readFile(upload:any) {
+        public readFile(upload:Event) {
             const target:HTMLInputElement = upload.target as HTMLInputElement;
             let reader = new FileReader();
             

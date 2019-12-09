@@ -1,16 +1,25 @@
 import {tepmlateObject, funcConstuctorInterface} from "../service/interfaces";
 import { EditInterface } from "./editinterface";
 
+/**
+ *  Класс отвечающий за визуализацию "дерева"
+ *  Можно было бы разбить его на два, один сделать основным отвечающий за логику, второй - сабклассом, отвечающий за создание элементов
+ * 
+ */
 
 export class Tree {
 
     private _object:tepmlateObject;
 
     private _funcConstuctor:funcConstuctorInterface = {
-        add: (id:string):void => this._addItem(id),
+        /**
+         *  динамический конструктор функции обработчика на добавление, удаление и редактирования элемента
+         */
+        add: (id:string):void => this._addItem(id), 
         delete: (id:string):void => this._deleteItem(id),
         edit: (id:string):void => this._editItem(id)
     }
+
     private _editInteface:EditInterface;
 
     private _rerenderJsonObject:Function = () => {};
@@ -20,14 +29,14 @@ export class Tree {
     
         this._object = objectTree;
         //this._object = {... objectTree};
-        this._editInteface = new EditInterface;
-   
+        this._editInteface = new EditInterface;   
     }
 
     private _createTree(object:tepmlateObject):HTMLElement {
 
         /*
-         *  Метод обходит входящий массив и строит по его структуре дерево  
+         *  Метод обходит входящий массив и строит "дерево" по его структуре
+         *  UlInner - обертка для вложенной ветки 
          */
 
         let ulInner:HTMLUListElement = document.createElement('ul');
@@ -46,7 +55,7 @@ export class Tree {
     private _createItemInterfaceMenu(id:string) {
 
         /**
-         *  Создание интерфейс кнопок
+         *  Создание интерфейса кнопок
          */
 
         const itemInterfaceMenu:string[] = ['add', 'delete', 'edit'];
@@ -130,7 +139,8 @@ export class Tree {
 
         this.rerender();
         this._rerenderJsonObject(JSON.stringify(this._object));
-}
+    }
+
     private _createElement(name:string, id:string = this._createID(), numberOfChildren:number = 0):any {
 
         /**
@@ -175,6 +185,9 @@ export class Tree {
     }
 
     private _createSubObject(name:string, id:string):tepmlateObject {
+        /**
+         * Объект для создания нового элемента
+         */
         return { name, id, attributes: [], childs: []}
     }
 
@@ -192,9 +205,10 @@ export class Tree {
 
         /*
         * Метод создает корневой блок и добавляет в себя дерево объектов
+        * ULMain - обертка коневого элемента
         */
 
-        let ulMain:HTMLUListElement = document.createElement('ul');
+        const ulMain:HTMLUListElement = document.createElement('ul');
             ulMain.className = "ulMain";
 
         if (object) {
