@@ -1,9 +1,9 @@
 import { Tree } from "./components/tree";
 import { Jsonview } from "./components/jsonview";
 import { tepmlateObject } from "./service/interfaces";
-import { readFile } from "./service/service";
+import { FileService } from "./components/fileservice";
 
-const item:tepmlateObject = {
+let item:tepmlateObject = {
 
     name: "name1",
     id: "p1mpk3f7tpce4idr7cn3qq",
@@ -76,11 +76,34 @@ const treeview:HTMLElement | null = document.getElementById('treeview');
 
 if (treeview) treeview.appendChild(myTree.drawTree());
 
-
 const myJson:Jsonview = new Jsonview(item);
 
+myTree.rerenderJsonObject = myJson.rerender.bind(myJson);
+myTree.editInterfaceSetRender();
+
+
+
+const newFileService = new FileService;
+
+const downloadButton = document.getElementById("download");
+if (downloadButton) downloadButton.addEventListener("click", (e) =>  { e.preventDefault(), newFileService.download(JSON.stringify(item))});
 
 const fileInput:HTMLElement | null = document.getElementById("fileupload");
 
-if (fileInput) fileInput.addEventListener('change', readFile, false);
+if (fileInput) fileInput.addEventListener('change', (e) => {
+                                                            newFileService.readFile(e).then(res => {
+                                                                item = { ...JSON.parse(res as string)};                                                               
+                                                                myJson.json = item;
+                                                                myTree.object = item;
+                                                            });
+                                                            myTree.rerender();
+                                                            myJson.rerender();
+                                                        }, false);
 
+
+
+const test = document.getElementById("test");
+
+if (test) {
+    console.log("test");
+    test.addEventListener("click", () => console.log(item));}

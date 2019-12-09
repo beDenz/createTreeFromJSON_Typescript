@@ -39,6 +39,9 @@ input, button {
 .container {
     max-width: 1600px;
 }
+.container-980 {
+    max-width: 980px;
+}
 
 
 
@@ -53,6 +56,10 @@ input, button {
 
 .flex-justify-space-between {
     justify-content: space-between;
+}
+
+.flex-justify-space-around {
+    justify-content: space-around;
 }
 
 .flex-align-center {
@@ -85,7 +92,7 @@ input, button {
 }
 
 .item-close {
-    display: none;
+    display: none !important;
 }
 
 .width-50 {
@@ -133,6 +140,22 @@ input, button {
 
 .interface {
  
+    &__uploadButton {
+        
+    }
+    &__downloadButton {
+        text-transform: uppercase;
+    }
+    
+    .button {
+        background-color: #d19f68;
+        padding: 20px 30px;
+        cursor: pointer;
+        &:hover {
+            color: #fff;
+        }
+    }
+
 }
 
 .drawTree {
@@ -193,6 +216,7 @@ input, button {
     background-color: #d19f68;
     border-radius: 10px;
     z-index: 2;
+    align-self: center;
     
 
     &__item {

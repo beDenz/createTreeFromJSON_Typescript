@@ -193,3 +193,39 @@
     
         <button class="edit-interface__submit-button btn margin-top-25px " type="submit">Submit</button>
     </form>
+
+    function download(data:any, filename:any, type:any) {
+    var file = new Blob([data], {type: type});
+
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+
+
+            public async readFile(upload:any) {
+    
+            const target:HTMLInputElement = upload.target as HTMLInputElement;  
+            let reader = new FileReader();
+        
+            if (target && target.files) {
+                        
+                        reader.readAsText(target.files[0]);
+                        reader.onload = function() {
+                            console.log("!!!!!", reader.result)
+                            return reader.result;                                                    
+                        };
+                        
+                        reader.onerror = function() {
+                            console.log(reader.error);
+                        }; 
+           }
+
+        }

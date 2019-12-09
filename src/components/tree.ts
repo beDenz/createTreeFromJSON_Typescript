@@ -5,28 +5,37 @@ import { EditInterface } from "./editinterface";
 export class Tree {
 
     private _object:tepmlateObject;
-    public funcConstuctor:funcConstuctorInterface = {
+    private _funcConstuctor:funcConstuctorInterface = {
         add: (id:string):void => this._addItem(id),
         delete: (id:string):void => this._deleteItem(id),
         edit: (id:string):void => this._editItem(id)
     }
+    private _editInteface:EditInterface;
+
+    private _rerenderJsonObject:Function = () => {};
+
 
     constructor(objectTree:tepmlateObject) {
-        
-        this._object = {...objectTree};       
-
+    
+        this._object = objectTree;
+        this._editInteface = new EditInterface;
+   
     }
 
     public get object():tepmlateObject {
         return this._object;
     }
 
+    public set object(object:tepmlateObject) {
+        this._object = object;
+    } 
+
     private _createTree(object:tepmlateObject):HTMLElement {
 
         let ulInner:HTMLUListElement = document.createElement('ul');
-            ulInner.className = "ulInner";
+            ulInner.className = "ulInner item-open";
 
-        const element:HTMLElement = this._createElement(object.name, object.id).li;                      
+        const element:HTMLElement = this._createElement(object.name, object.id, object.childs.length).li;                      
 
         if (object.childs.length > 0) object.childs.forEach((item:tepmlateObject) => ulInner.appendChild(this._createTree(item)));
             
@@ -51,10 +60,13 @@ export class Tree {
     // TODO: изменить имена
     private _addItem(id:string):void {
  
-        let element:HTMLElement | null = document.getElementById(id);
-        let element2;
+        //let element:HTMLElement | null = document.getElementById(id);
+        //let element2;
+
         const object:any = this._createElement('default name');
         const item:tepmlateObject = this._objectIterator(id).object;
+        item.childs.push(object.object);
+        /*
         if (item && element) {
      
             item.childs.push(object.object);
@@ -68,23 +80,31 @@ export class Tree {
 
             }
         }
+*/
+        this.rerender();
+        this._rerenderJsonObject(JSON.stringify(this._object));
     }
 
     private _deleteItem(id:string):void {
-
+        console.log(this._object);
+        
         if(this._objectIterator(id).parent) {
             let element:HTMLElement | null = document.getElementById(id);
             if (element) element.remove();
             this._objectIterator(id).parent.childs = this._objectIterator(id).parent.childs.filter((item:any) => item.id !== id);
         } else console.log("This is main element");
 
+        this.rerender();
+        this._rerenderJsonObject(JSON.stringify(this._object));
+
     }
 
     private _editItem(id:string):void {
-        console.log('edit', id);
 
-        const editWindow:HTMLElement = this._createEditInterface(this._objectIterator(id).object);
+        const editWindow:HTMLElement = this._editInteface.createEditInterface(this._objectIterator(id).object);
         document.body.appendChild(editWindow);
+        this.rerender();
+        this._rerenderJsonObject(JSON.stringify(this._object));
 }
 
     public drawTree(object:tepmlateObject = this._object):HTMLElement {
@@ -99,7 +119,7 @@ export class Tree {
             return ulMain;
     }
 
-    private _createElement(name:string, id:string = this._createID()):any {
+    private _createElement(name:string, id:string = this._createID(), numberOfChildren:number = 0):any {
      
         let span:HTMLSpanElement = document.createElement('span');
             span.className ='drawTree__title';
@@ -114,7 +134,8 @@ export class Tree {
 
        let spanButton:HTMLSpanElement = document.createElement('span');
             spanButton.className ='drawTree__button';
-            spanButton.textContent = "+";
+
+            numberOfChildren > 0 ? spanButton.textContent = "-": spanButton.textContent = "*";
             spanButton.addEventListener("click", (e) => 
        {
            
@@ -142,7 +163,7 @@ export class Tree {
         const itemInterface__item:HTMLLIElement = document.createElement('li');
             itemInterface__item.innerHTML = item;
             itemInterface__item.className = "itemInterface__item";
-            itemInterface__item.addEventListener("click", () => this.funcConstuctor[item](id));              
+            itemInterface__item.addEventListener("click", () => this._funcConstuctor[item](id));              
             itemInterface.appendChild(itemInterface__item);
         });
 
@@ -161,136 +182,36 @@ export class Tree {
     }
 
     private _createID():string {
+        // Генератор случайного ID
         const id:string = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        //console.log(id); 
         return id;
     }
 
-    private _createEditInterface(object:tepmlateObject) {
-
-
-        const title:HTMLElement = document.createElement('h3');
-            title.textContent = "Edit element";
-            title.className = "edit-interface__title";
+    public rerender() {
         
-        const editInterfaceCloseButton:HTMLElement = document.createElement('div');
-            editInterfaceCloseButton.className = "edit-interface__closeButton btn";
-            editInterfaceCloseButton.id = "editInterfaceCloseButton";
-            editInterfaceCloseButton.textContent = "x";
-            editInterfaceCloseButton.addEventListener("click", this._closeEditIterface);
+        /*
+         * Метод перерисовыет DOM, вызывается при изменнении объекта
+         */
 
-
-        const headerDiv:HTMLElement = document.createElement('div');
-            headerDiv.className = "edit-interface__header display-flex";
-            headerDiv.appendChild(title);
-            headerDiv.appendChild(editInterfaceCloseButton);
-
-
-        const nameLabel:HTMLLabelElement = document.createElement('label');
-            nameLabel.htmlFor = "name";
-            nameLabel.textContent = "Name:"
-
-        const nameInput:HTMLInputElement = document.createElement('input');
-            nameInput.className = "edit-interface__input name";
-            nameInput.placeholder = "Enter name element...";
-            nameInput.id = "element-name";
-            nameInput.value = object.name;
-
-        function createAttributeDiv():HTMLElement {
-                    const attrInputName:HTMLInputElement = document.createElement('input');
-                        attrInputName.className = "edit-interface__input attribute-name";
-                        attrInputName.placeholder = "Enter attribute...";
-                        attrInputName.id = "attribute-name"; // TODO: убрать
-                        attrInputName.setAttribute("myId", "attribute-name");
-                    const attrInputProperty:HTMLInputElement = document.createElement('input');
-                        attrInputProperty.className = "edit-interface__input property";
-                        attrInputProperty.placeholder = "Enter property...";
-                        attrInputProperty.id = "attribute-property"; // TODO: убрать
-                        attrInputProperty.setAttribute("myId", "attribute-property");
-                    const span:HTMLElement = document.createElement('span');
-                        span.textContent = ":";
-    
-                    const divAttr:HTMLElement = document.createElement('div');
-                        divAttr.className = "edit-interface__row display-flex flex-justify-space-between";
-                        divAttr.appendChild(attrInputName);
-                        divAttr.appendChild(span);
-                        divAttr.appendChild(attrInputProperty);
-
-                    return divAttr;
+        const render = document.getElementById("treeview");
+        if (render) {            
+            render.children[1].remove();
+           setTimeout(()=>{
+               render.appendChild(this.drawTree());
+            }, 1);
         }
 
-        const divName:HTMLElement = document.createElement('div');
-            divName.className = "edit-interface__row display-flex flex-align-center flex-justify-space-between";
-            divName.appendChild(nameLabel);
-            divName.appendChild(nameInput);
-
-        const addAttributeBlockButton:HTMLElement = document.createElement('div');
-            addAttributeBlockButton.textContent = "+";
-            addAttributeBlockButton.className = "add-attribute-block-button btn margin-top-25px margin-0-auto";
-            addAttributeBlockButton.addEventListener("click", () => windowWithInputs.appendChild(createAttributeDiv()));            
-                        
-        const submitButton:HTMLButtonElement = document.createElement('button');
-            submitButton.className = "edit-interface__submit-button btn margin-top-25px";
-            submitButton.textContent = "Submit";
-            submitButton.type = "submit";
-
-        const windowWithInputs:HTMLElement = document.createElement('div');
-            windowWithInputs.id = "formInputs";
-            windowWithInputs.className = "margin-top-25px";
-            windowWithInputs.appendChild(divName);
-            windowWithInputs.appendChild(createAttributeDiv());
-        
-        const window:HTMLElement = document.createElement('form');
-            window.className = "edit-interface padding-20";
-            window.id = "editIterface";
-            window.appendChild(headerDiv);
-            window.appendChild(windowWithInputs);
-            window.appendChild(addAttributeBlockButton);
-            window.appendChild(submitButton);
-            window.addEventListener("submit", (e) =>  {    
-                e.preventDefault();    
-                  
-                const target = e.target as HTMLInputElement;
-                const arrayOfInputs:NodeListOf<HTMLInputElement> = target.querySelectorAll('input');
-                const createObjectfromEditWindow = (array:NodeListOf<HTMLInputElement>):any => {
-                
-                    let windowObject: any = {
-                        attributes: {}
-                    };
-                    let temp:string;
-
-                    array.forEach((item:HTMLInputElement) => {
-                        if (item.id === "element-name") windowObject.name = item.value 
-                        if (item.id === "attribute-name") temp = item.value;
-                        if (item.id === "attribute-property") windowObject.attributes[temp] = item.value;
-                    });
-
-                return windowObject;
-                }  
-                const thisObject:any = createObjectfromEditWindow(arrayOfInputs);              
-                //object = { ...object, name: thisObject.name, attributes: {...object.attributes, ...thisObject.attributes} };
-                object.name = thisObject.name;
-                object.attributes = {...object.attributes, ...thisObject.attributes};
-                this._closeEditIterface();
-                })
-
-        return window;
-
-
-        //const temp = document.getElementById('mywindow');
-
-        //if (temp) temp.appendChild(window);
     }
 
-    private _closeEditIterface() {
-
-        const editInterface = document.getElementById("editIterface");
-        
-        if (editInterface) editInterface.remove();
-
+    public set rerenderJsonObject(func:Function) {
+        this._rerenderJsonObject = func;
     }
 
-
-    
+    public editInterfaceSetRender() {
+        this._editInteface.rerender = () => {
+            this.rerender();
+            this._rerenderJsonObject(JSON.stringify(this._object));
+        }
+    }
 
 }

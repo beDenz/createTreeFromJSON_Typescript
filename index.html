@@ -11,14 +11,12 @@
 <body>
     <header class="header container margin-0-auto">
             <h1 class="header__title">Решение тестового задания №7</h1>
-
             <p class="header_description">Создайте интерфейс построения дерева элементов для записей с произвольными атрибутами и генерацией структуры в JSON.</p>
     </header>
 
 <main class="main container margin-0-auto">
-    <section class="solution margin-top-50px">
-        
-        <div class="display-flex">
+    <section id="solution" class="solution margin-top-50px">        
+        <div id="render"  class="display-flex">
             <div id="treeview" class="mapping width-50 padding-20">
                 <h2 class="subtitle">Tree</h2>
             </div>
@@ -26,29 +24,24 @@
                 <h2 class="subtitle">JSON</h2>
             </div>
         </div>
+        <div class="interface margin-top-50px container-980 margin-0-auto">
+            <form class="display-flex flex-justify-space-around">
+                <div>
+                    <label for="file">Upload File</label>
+                    <input type="file" name="file" id="fileupload" class="interface__uploadButton button">   
+                </div>
 
-
-        <div class="interface margin-top-50px">
-
-            <form action="">
-                <input type="file" id="fileupload">
+                <button id="download" class="interface__downloadButton button">Download JSON file</button>
             </form>
+            
 
         </div>
 
 
-    </section>
-
-  
+    </section> 
     <div id="mywindow"></div>
-
-
 </main>
-<br><br>
-
-
-
-
-    <script src="dist/index.js"></script>
+<div id="test" >TEST</div>
+<script src="dist/index.js"></script>
 </body>
 </html>

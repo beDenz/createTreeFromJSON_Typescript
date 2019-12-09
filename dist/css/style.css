@@ -34,6 +34,10 @@ input, button {
   max-width: 1600px;
 }
 
+.container-980 {
+  max-width: 980px;
+}
+
 .display-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -50,6 +54,11 @@ input, button {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.flex-justify-space-around {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .flex-align-center {
@@ -83,7 +92,7 @@ input, button {
 }
 
 .item-close {
-  display: none;
+  display: none !important;
 }
 
 .width-50 {
@@ -110,6 +119,20 @@ input, button {
 
 .mapping {
   border-right: 1px solid #d19f68;
+}
+
+.interface__downloadButton {
+  text-transform: uppercase;
+}
+
+.interface .button {
+  background-color: #d19f68;
+  padding: 20px 30px;
+  cursor: pointer;
+}
+
+.interface .button:hover {
+  color: #fff;
 }
 
 .drawTree__item {
@@ -156,6 +179,9 @@ input, button {
   background-color: #d19f68;
   border-radius: 10px;
   z-index: 2;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .itemInterface__item {
